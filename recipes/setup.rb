@@ -64,8 +64,8 @@ node[:deploy].each do |application, deploy|
       variables(deploy: deploy,
                 application: application,
                 workers: workers,
-                syslog: node[:sidekiq][application][:syslog],
-                environment_variables: OpsWorks::Escape.escape_double_quotes(deploy[:environment_variables]))
+                environment_variables: OpsWorks::Escape.escape_double_quotes(deploy[:environment_variables]),
+                syslog: node[:sidekiq][application][:syslog])
       notifies :reload, resources(service: 'monit'), :immediately
     end
 
